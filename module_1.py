@@ -1,10 +1,4 @@
-# CodeSkulptor runs Python programs in your browser.
-# Click the upper left button to run this simple demo.
-
-# CodeSkulptor runs in Chrome 18+, Firefox 11+, and Safari 6+.
-# Some features may work in other browsers, but do not expect
-# full functionality.  It does NOT run in Internet Explorer.
-
+"""directd graph specific methods"""
 EX_GRAPH0 = {0 : set([1, 2]),
              1 : set([]),
              2 : set([])}
@@ -29,31 +23,40 @@ EX_GRAPH2 = {0 : set([1, 5, 4]),
              9 : set([0, 4, 5, 6, 7, 3])
              }
 
-print EX_GRAPH0
-
-
 def make_complete_graph(num_nodes):
+    """makes complete graph from given number of nodes
+    so every possible edge is counted"""
     graph = {}
     if num_nodes <=1:        
         graph = {0 : set([])}
     else:
-        for i in range(num_nodes):
-            graph[i]=(set(range(num_nodes)).difference(set([i])))
+        for num in range(num_nodes):
+            graph[num]=(set(range(num_nodes)).difference(set([num])))
     return graph
 
-# should be finished
 def compute_in_degrees(digraph):
+    """computes in_degree for every node, as amount of 
+    nodes directed to particular node. (considering every tail
+    node for particular head node)"""
     in_degrees = {}
-    for i in digraph.keys():
-        if not digraph[i]:
-            print digraph[i]
+    for key in digraph.keys():
+        in_degrees[key]=0
+    for key in digraph.keys():
+        for elemnt in digraph[key]:
+            in_degrees[elemnt] += 1
+    
+    return in_degrees
              
+def in_degree_distribution(digraph):
+    """computes in_degree_distiribution
+    as amount of pissible in_degrees
+    in particular graph"""
+    graph_in_degrees = set(compute_in_degrees(digraph).values())
+    in_deg_dist = {}
+    for val in graph_in_degrees:
+        in_deg_dist[val] = 0
+    
+    for degree in in_deg_dist.keys():
+        in_deg_dist[degree] = compute_in_degrees(digraph).values().count(degree)
         
-compute_in_degrees(EX_GRAPH0)
-
-
-
-
-
-
-
+    return in_deg_dist
