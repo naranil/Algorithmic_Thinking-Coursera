@@ -9,7 +9,9 @@ of DPA algorithm
 
 # general imports
 import random
-
+import module_1
+import project_1
+import matplotlib.pyplot as plt
 class DPATrial:
     """
     Simple class to encapsulate optimized trials for DPA algorithm
@@ -60,5 +62,25 @@ class DPATrial:
         return new_node_neighbors
 
 
+def make_dpa_graph(n, m):
+
+    dpa_graph = module_1.make_complete_graph(m)
+    dpa = DPATrial(m)
+
+    for new_node in range(m, n):
+        new_node_neighbors = dpa.run_trial(m)
+        dpa_graph[new_node] = new_node_neighbors
+
+    return dpa_graph
+
+
 if __name__ == '__main__':
-    pass
+
+    graph = project_1.normalize_distribution(module_1.in_degree_distribution(make_dpa_graph(27770,12)))
+    plt.loglog(graph.keys(), graph.values(), 'go')
+    plt.xlabel('Nodes')
+    plt.ylabel('Connectivity')
+    plt.title('DPA graph in-degree distribution')
+    plt.show()
+
+
