@@ -84,16 +84,28 @@ def normalize_distribution(distribution):
 
 if __name__ == '__main__':
 
-    graph1 = normalize_distribution(in_degree_distribution(compleate_directed_graph(300, 0.4)))
-    graph2 = normalize_distribution(in_degree_distribution(compleate_directed_graph(300, 0.4)))
-    graph3 = normalize_distribution(in_degree_distribution(compleate_directed_graph(300, 0.4)))
+    citation_graph = load_graph(CITATION_URL)
+    citation_distribution = normalize_distribution(in_degree_distribution(citation_graph))
 
-    plt.loglog(graph1.keys(), graph1.values(), 'go')
+    plt.loglog(citation_distribution.keys(),citation_distribution.values(),'go')
+    plt.title('Citation Graph')
+    plt.xlabel('papers')
+    plt.ylabel('citations')
     plt.show()
 
-    citation_graph = load_graph(CITATION_URL)
-    out_degree = {k: len(v) for (k,v) in citation_graph.items()}
+    graph1 = normalize_distribution(in_degree_distribution(compleate_directed_graph(300, 0.6)))
+    graph2 = normalize_distribution(in_degree_distribution(compleate_directed_graph(500, 0.2)))
+    graph3 = normalize_distribution(in_degree_distribution(compleate_directed_graph(800, 0.8)))
 
+    for graph in (graph1, graph2, graph3):
+
+        plt.loglog(graph.keys(), graph.values(), 'go')
+        plt.title('Citation Graph')
+        plt.xlabel('papers')
+        plt.ylabel('citations')
+        plt.show()
+
+    out_degree = {k: len(v) for (k,v) in citation_graph.items()}
     print (numpy.mean(out_degree.values()))
 
 

@@ -76,11 +76,12 @@ def make_dpa_graph(n, m):
 
 if __name__ == '__main__':
 
+
     graph = project_1.normalize_distribution(module_1.in_degree_distribution(make_dpa_graph(27770,12)))
     plt.loglog(graph.keys(), graph.values(), 'go')
-    plt.xlabel('Nodes')
-    plt.ylabel('Connectivity')
-    plt.title('DPA graph in-degree distribution')
+    plt.xlabel('Papers')
+    plt.ylabel('Cications')
+    plt.title('DPA Citation graph simulation')
     plt.show()
 
 
