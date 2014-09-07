@@ -1,3 +1,5 @@
+from module1 import module_1, project_1
+
 __author__ = 'taras'
 
 """
@@ -9,8 +11,6 @@ of DPA algorithm
 
 # general imports
 import random
-import module_1
-import project_1
 import matplotlib.pyplot as plt
 class DPATrial:
     """

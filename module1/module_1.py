@@ -1,4 +1,7 @@
 """directd graph specific methods"""
+
+import collections
+
 EX_GRAPH0 = {0 : set([1, 2]),
              1 : set([]),
              2 : set([])}
@@ -51,12 +54,19 @@ def in_degree_distribution(digraph):
     """computes in_degree_distiribution
     as amount of pissible in_degrees
     in particular graph"""
-    graph_in_degrees = set(compute_in_degrees(digraph).values())
-    in_deg_dist = {}
-    for val in graph_in_degrees:
-        in_deg_dist[val] = 0
-    
-    for degree in in_deg_dist.keys():
-        in_deg_dist[degree] = compute_in_degrees(digraph).values().count(degree)
-        
+
+
+    in_degrees = compute_in_degrees(digraph)
+    #Counter is subclass of dict so no need to explicitly convert
+    in_deg_dist = collections.Counter(in_degrees.values())
+
+    #Old inefficient solution
+    # graph_in_degrees = set(compute_in_degrees(digraph).values())
+    # in_deg_dist = {}
+    # for val in graph_in_degrees:
+    #     in_deg_dist[val] = 0
+    #
+    # for degree in in_deg_dist.keys():
+    #     in_deg_dist[degree] = compute_in_degrees(digraph).values().count(degree)
+    #
     return in_deg_dist

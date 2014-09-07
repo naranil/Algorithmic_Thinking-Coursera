@@ -8,11 +8,13 @@ Imports physics citation graph
 
 import urllib2
 import random
-import itertools
-from module_1 import in_degree_distribution
 from matplotlib import rcParams
+
 import matplotlib.pyplot as plt
 import numpy
+
+from module1.module_1 import in_degree_distribution
+
 
 dark2_colors = [(0.10588235294117647, 0.6196078431372549, 0.4666666666666667),
                 (0.8509803921568627, 0.37254901960784315, 0.00784313725490196),
@@ -100,14 +102,13 @@ if __name__ == '__main__':
     for graph in (graph1, graph2, graph3):
 
         plt.loglog(graph.keys(), graph.values(), 'go')
-        plt.title('Citation Graph')
+        plt.title('ER graph in-degree distribution')
         plt.xlabel('papers')
         plt.ylabel('citations')
         plt.show()
 
     out_degree = {k: len(v) for (k,v) in citation_graph.items()}
     print (numpy.mean(out_degree.values()))
-
 
 # x = itertools.islice(normalized_distribution.items(), 0, 10)
 # for key, val in x:
